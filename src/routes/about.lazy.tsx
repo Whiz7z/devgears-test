@@ -1,8 +1,10 @@
-import { createLazyFileRoute } from "@tanstack/react-router";import React, { useEffect, useState } from "react";
+import { createLazyFileRoute } from "@tanstack/react-router";
+import  { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { setUser, user$ } from "../../store/store";
 import { useObservable } from "../hooks/useObservable";
 import Table from "../components/Table";
+import { OAuthError } from "@auth0/auth0-react";
 
 function About() {
   const {
@@ -21,8 +23,8 @@ function About() {
       if (!isAuthenticated) {
         try {
           await getAccessTokenSilently();
-        } catch (error) {
-          if (error.error === "login_required") {
+        } catch (error: unknown) {
+          if ((error as OAuthError).error === "login_required") {
             loginWithRedirect();
           }
         }
@@ -32,13 +34,6 @@ function About() {
     checkAuth();
   }, [isAuthenticated, getAccessTokenSilently, loginWithRedirect]);
 
-  // useEffect(() => {
-  //   if (isAuthenticated && auth0User && storedUser !== null) {
-  //     setUser(JSON.parse(localStorage.getItem("user")));
-  //   } else {
-  //     setUser(auth0User);
-  //   }
-  // }, [isAuthenticated, auth0User, storedUser]);
 
   useEffect(() => {
     const localStorageUser = localStorage.getItem("user");
@@ -46,6 +41,7 @@ function About() {
     if (localStorageUser) {
       setUser(JSON.parse(localStorageUser));
     } else if (isAuthenticated && auth0User) {
+      console.log(JSON.stringify(auth0User));
       setUser(auth0User);
     }
   }, [isAuthenticated, auth0User]);

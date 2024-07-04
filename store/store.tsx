@@ -8,7 +8,7 @@ const loadInitialState = (): User | null => {
   return savedUser ? JSON.parse(savedUser) : null;
 };
 
-const initialUserState: User | null = loadInitialState();
+const initialUserState: User | null  = loadInitialState();
 
 const userSubject = new BehaviorSubject<User | null>(initialUserState);
 

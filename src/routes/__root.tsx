@@ -1,14 +1,14 @@
-import React from "react";
+
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const RootRoute = () => {
-  const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    logout({ returnTo: window.location.origin });
+    logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
   return (

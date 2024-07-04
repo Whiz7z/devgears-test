@@ -1,15 +1,16 @@
 
-import React, { useMemo } from "react";
+import  { useMemo } from "react";
 import {
   useReactTable,
-  ColumnDef,
+  
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
-import { updateUser } from "../../store/store"; // Ensure correct path
+import { updateUser } from "../../store/store"; 
 
-const Table = ({ data }) => {
-  const columns = useMemo<ColumnDef<any>[]>(
+
+const Table =  ({ data }) => {
+  const columns = useMemo(
     () => [
       {
         accessorKey: "key",
