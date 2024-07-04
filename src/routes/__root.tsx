@@ -17,8 +17,8 @@ const RootRoute = () => {
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>
-        <Link to="/about" className="[&.active]:font-bold">
-          About
+        <Link to="/profile" className="[&.active]:font-bold">
+          Profile
         </Link>
         {isAuthenticated ? (
           <button onClick={handleLogout} className="font-bold">

@@ -1,12 +1,12 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { setUser, user$ } from "../../store/store";
 import { useObservable } from "../hooks/useObservable";
 import Table from "../components/Table";
 import { OAuthError } from "@auth0/auth0-react";
 
-function About() {
+function Profile() {
   const {
     user: auth0User,
     isAuthenticated,
@@ -34,7 +34,6 @@ function About() {
     checkAuth();
   }, [isAuthenticated, getAccessTokenSilently, loginWithRedirect]);
 
-
   useEffect(() => {
     const localStorageUser = localStorage.getItem("user");
 
@@ -50,6 +49,14 @@ function About() {
     return <div>Loading ...</div>;
   }
 
+  if (!isAuthenticated) {
+    return (
+      <>
+        <p className="text-center">You are not logged in</p>
+      </>
+    );
+  }
+
   return (
     isAuthenticated &&
     storedUser && (
@@ -60,8 +67,8 @@ function About() {
   );
 }
 
-export const Route = createLazyFileRoute("/about")({
-  component: About,
+export const Route = createLazyFileRoute("/profile")({
+  component: Profile,
 });
 
-export default About;
+export default Profile;
