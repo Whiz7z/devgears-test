@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollable-cell {
+  max-height: 150px; /* or any appropriate height */
+  overflow-y: auto;  /* enables vertical scrolling */
+}
